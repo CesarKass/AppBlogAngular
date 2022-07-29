@@ -14,7 +14,7 @@
           <a class="nav-link" [routerLink]="['/inicio']">Caregorias</a>
         </li>
       </ul>
-      <ul class="navbar-nav navbar-right">
+      <ul class="navbar-nav navbar-right" *ngIf="!identity">
         <li class="nav-item active">
           <a class="nav-link" [routerLink]="['/login']">Iniciar sesión</a>
         </li>
@@ -22,20 +22,20 @@
           <a class="nav-link" [routerLink]="['/registro']" >Registro</a>
         </li>
       </ul>
-      <ul class="navbar-nav navbar-right">
+      <ul class="navbar-nav navbar-right" *ngIf="identity && identity.name">
 
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" [routerLink]="['/inicio']" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Nombre usuario
+          <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            {{identity.name + ' '+identity.surname}}
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
             <a class="dropdown-item" [routerLink]="['/inicio']">Crear entrada</a>
             <a class="dropdown-item" [routerLink]="['/inicio']">Crear categoria</a>
             <div class="dropdown-divider"></div>
             <a class="dropdown-item" [routerLink]="['/inicio']">Mi perfil</a>
-            <a class="dropdown-item" [routerLink]="['/inicio']">Ajustes</a>
+            <a class="dropdown-item" [routerLink]="['/user-edit']">Ajustes</a>
             <div class="dropdown-divider"></div>
-            <a class="dropdown-item" [routerLink]="['/inicio']">Salir</a>
+            <a class="dropdown-item" [routerLink]="['/logout/1']">Salir</a>
           </div>
         </li>
         <!-- <li class="nav-item">

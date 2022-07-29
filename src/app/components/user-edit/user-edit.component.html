@@ -1,14 +1,15 @@
+
 <div class="row mt-2">
-    <div class="col-md-12">
-        <h2>Registro!</h2>
+    <div class="col-md-12"> 
+        <h2>{{title}}</h2>
         <hr>
         <div class="alert alert-success" *ngIf="status == 'success'">
-            El registro se ha completado correctamente, <a [routerLink]="['/login']">Inicia sesión aquí!</a>
+            El usuario fue actualizado correctamente.
         </div>
         <div class="alert alert-danger" *ngIf="status == 'error'">
-            El registro no se ha completado, reintente mas tarde.
+            Error, reintente mas tarde.
         </div>
-        <form class="col-md-6 ml-0 pl-0" #registerForm="ngForm" (ngSubmit)="onSubmit(registerForm)">
+        <form class="col-md-6 ml-0 pl-0" #EditarUsuarioForm="ngForm" (ngSubmit)="onSubmit(EditarUsuarioForm)">
             <div class="form-group">
                 <p>
                     <label for="name">Nomber</label>
@@ -31,24 +32,28 @@
             </div>
             <div class="form-group">
                 <label for="email">Email</label>
-                <input type="email"name="email"class="form-control"#email="ngModel"[(ngModel)]="
-                user.email" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">
+                <input type="email"name="email"class="form-control"
+                #email="ngModel"[(ngModel)]=" user.email" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">
                 <small *ngIf="!email.valid && email.touched"class="invalid-feedback d-block">
                      El correo no es válido
                 </small>
-           </div>
-            <div class="form-group">
+           </div> 
+           <div class="form-group"> 
+                    <label for="descripcion">Biografía</label> 
+                    <textarea [froalaEditor]="options" class="form-control" name="descripcion" id="descripcion" 
+                     [(froalaModel)]="user.descripcion" required
+                     cols="30" rows="10"></textarea>  
+
+            </div>
+           <div class="form-group">
                 <p>
-                    <label for="password">Contraseña</label>
-                    <input type="password" class="form-control" name="password" id="password"
-                    #password="ngModel" [(ngModel)]="user.password" required>
-                    <small *ngIf="!password.valid && password.touched" class="invalid-feedback d-block">
-                        El password no es válido
-                    </small>
+                    <label for="image">Imagen</label>
+                    <input type="file" class="form-control" name="image" id="image" 
+                    #image="ngModel" [(ngModel)]="user.image" required> 
                 </p>
             </div>
             <p>
-                <input type="submit" value="Registrar" class="btn btn-success" [disabled]="registerForm.invalid">
+                <input type="submit" value="Registrar" class="btn btn-success"  >
             </p>
         </form>
     </div>

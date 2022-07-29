@@ -14,10 +14,12 @@ export class RegisterComponent implements OnInit {
 
   public page_title: string;
   public user: User;
+  public status: string;
   constructor(
     private _userSerivice: UserService
   ) {
     this.page_title = 'Registrate';
+    this.status = '';
     this.user = new User(1, '', '', '2', '', '', '', '');
   }
 
@@ -25,10 +27,24 @@ export class RegisterComponent implements OnInit {
   }
 
   onSubmit(form: any) {
-    console.log(this.user);
-    console.log(this._userSerivice.test());
+    // console.log(this.user);
+    // console.log(this._userSerivice.test());
+    this._userSerivice.register(this.user).subscribe(
+      response => {
+        if (response.status == 'success') {
+          console.log(response);
+          this.status = response.status;
+          form.reset();
+        } else {
+          this.status = 'error';
+        }
+      },
+      error => {
+        this.status = 'error';
+        console.log(<any>error);
+      }
+    )
     
-    form.reset();
   }
 
 }

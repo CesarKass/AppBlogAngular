@@ -9,6 +9,8 @@ import { RegisterComponent } from './components/register/register.component';
 import { HomeComponent } from './components/home/home.component';
 import { ErrorComponent } from './components/error/error.component';
 import { UserEditComponent } from './components/user-edit/user-edit.component';
+import { CategoryNewComponent } from './components/category-new/category-new.component'; 
+import { PostNewComponent } from './components/post-new/post-new.component'; 
 
 const appRoutes: Routes = [
     { path: '', component: LoginComponent },
@@ -17,6 +19,8 @@ const appRoutes: Routes = [
     { path: 'logout/:sure', component: LoginComponent },
     { path: 'registro', component: RegisterComponent },
     { path: 'user-edit', component: UserEditComponent },
+    { path: 'category-new', component: CategoryNewComponent },
+    { path: 'post-new', component: PostNewComponent },
     { path: '*', component: ErrorComponent }
 ];
 

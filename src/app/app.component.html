@@ -9,9 +9,16 @@
       <ul class="navbar-nav mr-auto">
         <li class="nav-item active">
           <a class="nav-link" [routerLink]="['/inicio']">Inicio <span class="sr-only">(current)</span></a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" [routerLink]="['/inicio']">Caregorias</a>
+        </li> 
+        <li class="nav-item dropdown"> 
+          <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Caregorias
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" >
+              <a class="dropdown-item" href="{{c.name}}" *ngFor="let c of categories">{{c.name}}</a>  
+            </div>
+          </div>
         </li>
       </ul>
       <ul class="navbar-nav navbar-right" *ngIf="!identity">
@@ -23,14 +30,18 @@
         </li>
       </ul>
       <ul class="navbar-nav navbar-right" *ngIf="identity && identity.name">
-
+        <li>
+          <div class="avatarask">
+            <img src="{{avatarUserName}}" alt="AvatarIMG">
+          </div>
+        </li>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             {{identity.name + ' '+identity.surname}}
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" [routerLink]="['/inicio']">Crear entrada</a>
-            <a class="dropdown-item" [routerLink]="['/inicio']">Crear categoria</a>
+            <a class="dropdown-item" [routerLink]="['/post-new']">Crear entrada</a>
+            <a class="dropdown-item" [routerLink]="['/category-new']">Crear categoria</a>
             <div class="dropdown-divider"></div>
             <a class="dropdown-item" [routerLink]="['/inicio']">Mi perfil</a>
             <a class="dropdown-item" [routerLink]="['/user-edit']">Ajustes</a>
@@ -38,6 +49,7 @@
             <a class="dropdown-item" [routerLink]="['/logout/1']">Salir</a>
           </div>
         </li>
+
         <!-- <li class="nav-item">
           <a class="nav-link disabled" [routerLink]="['/inicio']">Disabled</a>
         </li> -->
@@ -46,5 +58,15 @@
   </nav>
 
   <router-outlet></router-outlet>
+
+  <hr>
+  <div class="content">
+    <div class="row">
+      <div class="col-12 d-flex justify-content-center">
+        TxT
+      </div>
+    </div>
+  </div>
+  <hr>
 
 </div>

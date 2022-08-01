@@ -1,0 +1,23 @@
+<div class="row mt-2">
+    <div class="col-md-12"> 
+        <h2>{{title}}</h2>
+        <hr>
+        <div class="alert alert-success" *ngIf="status == 'success'">
+            {{msg}}
+        </div>
+        <div class="alert alert-danger" *ngIf="status == 'error'">
+            Error, reintente mas tarde.
+        </div>
+        <form class="col-md-6 ml-0 pl-0" #CategoryForm="ngForm" (ngSubmit)="onSubmit(CategoryForm)">
+            <div class="form-group">
+                <label for="name">Nombre</label>
+                <input type="text" class="form-control" name="name" 
+                #name="ngModel" [(ngModel)]="category.name" required>
+                <small *ngIf="!name.valid && name.touched" class="invalid-feedback d-block">
+                    El nombre de la categoria no es válido
+                </small>
+            </div> 
+            <input type="submit" value="Registrar" class="btn btn-success" [disabled]="CategoryForm.invalid">
+        </form>
+    </div>
+</div>

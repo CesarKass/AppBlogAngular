@@ -18,7 +18,7 @@ export class LoginComponent implements OnInit {
   public token: string;
   constructor(
     private _userSerivice: UserService,
-    private router: Router,
+    private _router: Router,
     private activatedRoute: ActivatedRoute
   ) {
     this.page_title = 'Identificate';
@@ -56,11 +56,11 @@ export class LoginComponent implements OnInit {
     this._userSerivice.sigup(this.user, true).subscribe(
       response => {
         this.identity = response;
-
+        console.log(response);
         //Persistir datos del usuario
         localStorage.setItem('token', this.token);
         localStorage.setItem('identity', JSON.stringify(this.identity));
-        this.router.navigate(['inicio']);
+        this._router.navigate(['/inicio']);
       },
       error => {
         this.status = 'error';
@@ -79,7 +79,7 @@ export class LoginComponent implements OnInit {
         this.identity = '';
         this.token = '';
         
-        this.router.navigate(['inicio']);
+        this._router.navigate(['/inicio']);
       }
     });
   }

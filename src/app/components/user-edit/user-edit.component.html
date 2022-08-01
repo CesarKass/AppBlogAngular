@@ -4,7 +4,7 @@
         <h2>{{title}}</h2>
         <hr>
         <div class="alert alert-success" *ngIf="status == 'success'">
-            El usuario fue actualizado correctamente.
+            {{msg}}
         </div>
         <div class="alert alert-danger" *ngIf="status == 'error'">
             Error, reintente mas tarde.
@@ -12,7 +12,7 @@
         <form class="col-md-6 ml-0 pl-0" #EditarUsuarioForm="ngForm" (ngSubmit)="onSubmit(EditarUsuarioForm)">
             <div class="form-group">
                 <p>
-                    <label for="name">Nomber</label>
+                    <label for="name">Nombre</label>
                     <input type="text" class="form-control" name="name" id="name" 
                     #name="ngModel" [(ngModel)]="user.name" required pattern="[a-zA-Z]+">
                     <small *ngIf="!name.valid && name.touched" class="invalid-feedback d-block">
@@ -46,11 +46,13 @@
 
             </div>
            <div class="form-group">
-                <p>
                     <label for="image">Imagen</label>
-                    <input type="file" class="form-control" name="image" id="image" 
-                    #image="ngModel" [(ngModel)]="user.image" required> 
-                </p>
+                    <img *ngIf="avatarUser" src="{{avatarUserName}}" alt="AvatarIMG" width="80">
+                    <angular-file-uploader
+                        [config]="afuConfig"
+                        [resetUpload]=resetVar 
+                        (ApiResponse)="AvatarUpload($event)">
+                    </angular-file-uploader>
             </div>
             <p>
                 <input type="submit" value="Registrar" class="btn btn-success"  >

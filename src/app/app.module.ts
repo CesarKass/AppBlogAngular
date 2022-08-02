@@ -14,7 +14,15 @@ import { HomeComponent } from './components/home/home.component';
 import { ErrorComponent } from './components/error/error.component';
 import { UserEditComponent } from './components/user-edit/user-edit.component';
 import { CategoryNewComponent } from './components/category-new/category-new.component';
-import { PostNewComponent } from './components/post-new/post-new.component'; 
+import { PostNewComponent } from './components/post-new/post-new.component';
+import { PostDetailComponent } from './components/post-detail/post-detail.component';
+import { PostEditComponent } from './components/post-edit/post-edit.component';
+import { CategoryDetailComponent } from './components/category-detail/category-detail.component'; 
+
+import {  UserService } from './services/user.service';
+import { IdentityGuard } from './services/identity.guard';
+import { ProfileComponent } from './components/profile/profile.component';
+import { PostListComponent } from './components/post-list/post-list.component'; 
 
 @NgModule({
   declarations: [
@@ -25,7 +33,12 @@ import { PostNewComponent } from './components/post-new/post-new.component';
     ErrorComponent,
     UserEditComponent,
     CategoryNewComponent,
-    PostNewComponent
+    PostNewComponent,
+    PostDetailComponent,
+    PostEditComponent,
+    CategoryDetailComponent,
+    ProfileComponent,
+    PostListComponent
   ],
   imports: [
     BrowserModule,
@@ -39,7 +52,9 @@ import { PostNewComponent } from './components/post-new/post-new.component';
     
   ],
   providers: [
-    appRoutingProviders
+    appRoutingProviders,
+    UserService,
+    IdentityGuard
   ],
   bootstrap: [AppComponent]
 })

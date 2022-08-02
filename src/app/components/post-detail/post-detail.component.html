@@ -1,0 +1,21 @@
+<h2>{{page_title}}</h2>
+<div class="loading" *ngIf="!post">
+    Cargando...
+</div>
+
+<div class="container-fluid" *ngIf="post"> 
+        <article class="card">
+            <div class="card-header">
+                <h2>{{post.title}}</h2>
+            </div>
+            <div class="card-body">
+                <p [innerHtml]="post.content"></p>
+                <hr>
+                <p>
+                   Categoria {{post.category.name}} 
+                   <br>
+                   Publicado el {{post.created_at}}
+                </p>
+            </div>
+        </article> 
+</div>

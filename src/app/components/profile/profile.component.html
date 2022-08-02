@@ -1,0 +1,26 @@
+<div class="loading" *ngIf="!posts">
+    Cargando...
+</div>
+
+<div class="container-fluid" *ngIf="posts">
+    <div class="card mb-3" style="max-width: 540px;">
+        <div class="row no-gutters">
+          <div class="col-md-4 d-flex align-items-center justify-content-center">
+            <div class="avatarask">
+                <img src="{{avatarUserName}}" alt="AvatarIMG" >
+            </div>
+          </div>
+          <div class="col-md-8">
+            <div class="card-body">
+              <h5 class="card-title">Perfil de {{user.name + ' '+ user.surname}}</h5>
+              <p class="card-text" [innerHtml]="'Biografía ' + user.descripcion"></p> 
+            </div>
+          </div>
+        </div>
+    </div>
+
+    <app-post-list [posts]="posts" 
+                   [identify]="identify"
+                   [url]="url"
+                   (delete)="deletePost($event)"></app-post-list>
+</div>

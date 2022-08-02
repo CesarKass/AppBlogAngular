@@ -1,1 +1,10 @@
 /* You can add global styles to this file, and also import other style files */
+.avatarask{
+    width: 40px;
+    height: 40px;
+    overflow: hidden;
+    border-radius: 25px;
+}
+.avatarask img{ 
+    height: 40px;
+}

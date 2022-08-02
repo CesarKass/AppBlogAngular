@@ -42,6 +42,7 @@ export class UserService {
     }
 
     update(token:string, user:any): Observable<any> {
+        user.descripcion = global.htmlEntities(user.descripcion);//remplazar html entities por caracteres utf8
         let json = JSON.stringify(user);
         let params = 'json=' + json;
         let headers = new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded')
@@ -71,13 +72,16 @@ export class UserService {
         return this.token;
     }
 
-    // login(user: any): Observable<any> {
-    //     let json = JSON.stringify(user);
-    //     let params = 'json=' + json;
-    //     let headers = new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded');
-    //     console.log(params);
-
-    //     return this._http.post(this.url + 'registro', params, { headers: headers });
-    // }
+    getPosts(id:any): Observable<any> {
+        let headers = new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded');
+    
+        return this._http.get(this.url + 'post/user/' + id, { headers: headers });
+    }
+    getUser(id:any): Observable<any> {
+        let headers = new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded');
+    
+        return this._http.get(this.url + 'user/details/' + id, { headers: headers });
+    }
+ 
 
 }

@@ -1,0 +1,23 @@
+<h2>{{page_title}}</h2>
+<div class="loading" *ngIf="!category">
+    Cargando...
+</div>
+
+<div class="container-fluid" *ngIf="category">
+
+    <div class="loading" *ngIf="!posts">
+        Cargando posts...
+    </div>
+
+    <div class="alert alert-success"  *ngIf="posts && posts.length == 0">
+        No hay posts
+    </div>
+
+    <app-post-list [posts]="posts" 
+    [identify]="identify"
+    [url]="url"
+    (delete)="deletePost($event)"></app-post-list>
+</div>
+
+
+

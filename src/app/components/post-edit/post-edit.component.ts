@@ -9,13 +9,12 @@ import { global } from '../../services/globals';
 
 @Component({
   selector: 'app-post-new',
-  templateUrl: './post-new.component.html',
-  styleUrls: ['./post-new.component.css'],
+  templateUrl: '../post-new/post-new.component.html', 
   providers: [UserService, CategoryService, PostService]
 })
-export class PostNewComponent implements OnInit {
+export class PostEditComponent implements OnInit {
   public titlePage:string;
-  public identify:string;
+  public identify:any;
   public token:string;
   public status:string;
   public msg:string;
@@ -44,7 +43,7 @@ export class PostNewComponent implements OnInit {
     private _router: Router,
     private _activatedRoute: ActivatedRoute
   ) {
-    this.titlePage = 'Crear post';
+    this.titlePage = 'Editar post';
     this.status = '';
     this.msg = '';
     this.identify = this._userSerivice.getIdentity();
@@ -59,15 +58,16 @@ export class PostNewComponent implements OnInit {
 
   ngOnInit(): void {
     this.getCategories();
+    this.getPost();
   }
 
   onSubmit(form: any): void {
     console.log(this.post);
-    this._postService.create(this.token, this.post).subscribe(
+    this._postService.update(this.token, this.post, this.post.id).subscribe(
       response => {
         if (response.status=="success") {
           this.status = 'success';
-          this.msg = 'Post Registrado';
+          this.msg = 'Post Modificado';
           console.log(response);
           this._router.navigate(['/inicio']);
         } else {
@@ -80,6 +80,33 @@ export class PostNewComponent implements OnInit {
       }
     )
     
+  }
+
+  getPost(){
+    this._activatedRoute.params.subscribe(params =>{
+      let id = params['id'];
+ 
+      this._postService.getPost(id).subscribe(
+        response => {
+          console.log(response);
+          if (response.status == 'success') {
+            this.post = response.post;
+            this.imagePost = true;
+            this.imagePostName = global.url + 'post/image/'+this.post.image;
+            if (this.post.user_id != this.identify.sub) { 
+              this._router.navigate(['/inicio']);
+            }
+
+          } else {
+            this._router.navigate(['/inicio']);
+          }
+        },
+        error => {
+          this._router.navigate(['/inicio']);
+        }
+      );
+      
+    })
   }
 
   getCategories(){

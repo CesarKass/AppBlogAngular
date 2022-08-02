@@ -15,7 +15,7 @@ export class HomeComponent implements OnInit {
   public posts:any;
   public url:any;
   public identify:string;
-
+  public token:string;
   constructor(
     private _userSerivice: UserService,
     private _postService: PostService
@@ -23,6 +23,7 @@ export class HomeComponent implements OnInit {
     this.page_title = 'Inicio';
     this.url = global.url;
     this.identify = this._userSerivice.getIdentity();
+    this.token = this._userSerivice.getToken();
   }
 
   ngOnInit(): void {
@@ -40,5 +41,16 @@ export class HomeComponent implements OnInit {
       }
     )
   }
+
+  deletePost(id:any){ 
+    this._postService.delete(this.token, id).subscribe(
+      response => {
+        this.getPosts();
+      },
+      error => { 
+        console.log(<any>error);
+      }
+    )
+  } 
 
 }

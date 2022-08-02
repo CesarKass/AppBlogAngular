@@ -21,11 +21,12 @@ export class UserEditComponent implements OnInit {
   public resetVar: any;
   public options: Object = {
     placeholderText: 'Escriba aquí',
-    charCounterCount: false,
-    toolbarButtons: ['bold', 'italic', 'underline', 'paragraphFormat', 'alert'],
-    toolbarButtonsXS: ['bold', 'italic', 'underline', 'paragraphFormat', 'alert'],
-    toolbarButtonsSM: ['bold', 'italic', 'underline', 'paragraphFormat', 'alert'],
-    toolbarButtonsMD: ['bold', 'italic', 'underline', 'paragraphFormat', 'alert'],
+    charCounterCount: true,
+    language: 'es',
+    toolbarButtons: ['bold', 'italic', 'underline', 'paragraphFormat'],
+    toolbarButtonsXS: ['bold', 'italic', 'underline', 'paragraphFormat'],
+    toolbarButtonsSM: ['bold', 'italic', 'underline', 'paragraphFormat'],
+    toolbarButtonsMD: ['bold', 'italic', 'underline', 'paragraphFormat'],
   };
 
  
@@ -35,7 +36,7 @@ export class UserEditComponent implements OnInit {
   ) {
     this.status = '';
     this.msg = '';
-    this.avatarUser = false; 
+    this.avatarUser = true; 
     this.identity = this._userSerivice.getIdentity();
     this.token = this._userSerivice.getToken();
     this.resetVar = false;
@@ -47,9 +48,11 @@ export class UserEditComponent implements OnInit {
       this.identity.email,
       this.identity.password,
       this.identity.descripcion,
-      this.identity.iamge
+      this.identity.image
     );
-    this.avatarUserName = global.url + 'user/avatar/' + this.identity.iamge;
+    
+    this.avatarUserName = global.url + 'user/avatar/' + this.identity.image;
+    // console.log(this.avatarUserName);
     // this.user = this.identity; 
   }
 

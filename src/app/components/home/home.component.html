@@ -4,27 +4,11 @@
 </div>
 
 <div class="container-fluid" *ngIf="posts">
-     <div class="card-columns">
-        <article class="card w-100" *ngFor="let p of posts">
-            <div class="card-header">
-                <a [routerLink]="['/inicio']">{{p.title}}</a>
-            </div>
-            <div class="card-body">
-                <div class="w-100 border border-1 d-flex justify-content-center">
-                    <img *ngIf="p.image" src="{{url+'post/image/'+p.image}}" alt="img" srcset="" width="145">
-                    <img *ngIf="!p.image" src="../../../assets/img/default.jpg" alt="img" srcset="" width="80">
-                </div>
-
-                <div class="w-100 border border-1 d-flex justify-content-around">
-                    <span *ngIf="identify && identify.sub == p.user_id">
-                        <a [routerLink]="['/inicio']" class="btn btn-danger" >Borrar</a>
-                        <a [routerLink]="['/inicio']" class="btn btn-warning">Editar</a>
-                    </span>
-                    <a [routerLink]="['/inicio']" class="btn btn-success">Ver</a> 
-                </div>
-
-
-            </div>
-        </article>
-     </div> 
+    <app-post-list [posts]="posts" 
+    [identify]="identify"
+    [url]="url"
+    (delete)="deletePost($event)"></app-post-list>
 </div>
+
+
+

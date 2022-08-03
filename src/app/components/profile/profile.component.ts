@@ -3,6 +3,7 @@ import { Router, ActivatedRoute, Params} from '@angular/router';
 import { UserService } from '../../services/user.service';
 import { PostService } from '../../services/post.service';
 import { Post } from '../../models/post';
+import { User } from '../../models/user';
 import { global } from '../../services/globals';
 
 @Component({
@@ -29,6 +30,7 @@ export class ProfileComponent implements OnInit {
     this.url = global.url;
     this.identify = this._userSerivice.getIdentity();
     this.token = this._userSerivice.getToken();
+    this.user = new User(1, '', '', '2', '', '', '', '');
   }
 
   ngOnInit(): void {

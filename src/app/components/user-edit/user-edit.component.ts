@@ -64,7 +64,7 @@ export class UserEditComponent implements OnInit {
       response => {
         if (response) {
           console.log(this.user);
-
+ 
           if (response.changes.name) {
             this.user.name = response.changes.name;
           }
@@ -79,6 +79,7 @@ export class UserEditComponent implements OnInit {
           }
 
           this.identity = this.user;
+          this.identity.sub = this.user.id;
           localStorage.setItem('identity', JSON.stringify(this.identity));
 
           console.log(this.user);
